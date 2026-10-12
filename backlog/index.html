@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Backlog — GameVault</title>
+  <meta name="description" content="Organize your personal game backlog into Plan to Play, Currently Playing, and Completed — and let the Backlog Roulette decide for you.">
+  <script>
+    (function () {
+      try {
+        var theme = JSON.parse(localStorage.getItem("gamevault-theme") || '"dark"');
+        document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+      } catch (e) { document.documentElement.dataset.theme = "dark"; }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/style.css">
+  <link rel="stylesheet" href="../src/css/header.css">
+  <link rel="stylesheet" href="../src/css/cards.css">
+  <link rel="stylesheet" href="../src/css/modal.css">
+</head>
+<body data-view="backlog" data-base="..">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="header-root"></div>
+  <div id="alert-region" aria-live="polite"></div>
+
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <div>
+          <h1>My Backlog</h1>
+          <p id="backlog-summary">Loading your library…</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="roulette-btn" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.7" cy="8.7" r="1.4" fill="currentColor"/><circle cx="15.3" cy="15.3" r="1.4" fill="currentColor"/><circle cx="15.3" cy="8.7" r="1.4" fill="currentColor"/><circle cx="8.7" cy="15.3" r="1.4" fill="currentColor"/></svg>
+            Backlog Roulette
+          </button>
+          <button class="btn btn-danger" id="clear-all" type="button">Clear all</button>
+        </div>
+      </section>
+
+      <div class="status-chips" id="status-chips"></div>
+
+      <div class="backlog-board" id="backlog-board">
+        <section class="board-column" data-column="Plan to Play" aria-label="Plan to Play">
+          <div class="board-column-head">
+            <h2><span class="dot" style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block;"></span> Plan to Play</h2>
+            <span class="board-count">0</span>
+          </div>
+          <ul class="backlog-list"></ul>
+        </section>
+
+        <section class="board-column" data-column="Currently Playing" aria-label="Currently Playing">
+          <div class="board-column-head">
+            <h2><span class="dot" style="width:10px;height:10px;border-radius:50%;background:var(--warning);display:inline-block;"></span> Currently Playing</h2>
+            <span class="board-count">0</span>
+          </div>
+          <ul class="backlog-list"></ul>
+        </section>
+
+        <section class="board-column" data-column="Completed" aria-label="Completed">
+          <div class="board-column-head">
+            <h2><span class="dot" style="width:10px;height:10px;border-radius:50%;background:var(--deal);display:inline-block;"></span> Completed</h2>
+            <span class="board-count">0</span>
+          </div>
+          <ul class="backlog-list"></ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+  <div id="modal-root"></div>
+
+  <script type="module" src="../src/js/main.js"></script>
+</body>
+</html>

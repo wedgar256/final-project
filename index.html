@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameVault — Discover &amp; Track Your Games</title>
+  <meta name="description" content="GameVault is a game discovery dashboard: search thousands of titles, build a personal backlog, and track live digital store deals.">
+  <script>
+    (function () {
+      try {
+        var theme = JSON.parse(localStorage.getItem("gamevault-theme") || '"dark"');
+        document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+      } catch (e) { document.documentElement.dataset.theme = "dark"; }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <link rel="stylesheet" href="./src/css/header.css">
+  <link rel="stylesheet" href="./src/css/cards.css">
+  <link rel="stylesheet" href="./src/css/modal.css">
+</head>
+<body data-view="home" data-base=".">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="header-root"></div>
+  <div id="alert-region" aria-live="polite"></div>
+
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <div>
+          <h1>Discover your next game</h1>
+          <p>Search thousands of titles, save them to your backlog, and catch the best digital deals.</p>
+        </div>
+      </section>
+
+      <div class="home-layout">
+        <aside class="filters-panel" id="filters" aria-label="Search filters">
+          <div class="filters-head">
+            <h2>Filters</h2>
+            <button class="icon-btn filters-close" id="filters-close" type="button" aria-label="Close filters">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-group-title">Genre</p>
+            <div class="check-list" id="genre-filters"></div>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-group-title">Platform</p>
+            <div class="check-list" id="platform-filters">
+              <label class="check-item"><input type="radio" name="platform" value="all" checked><span>All</span></label>
+              <label class="check-item"><input type="radio" name="platform" value="pc"><span>PC</span></label>
+              <label class="check-item"><input type="radio" name="platform" value="playstation"><span>PlayStation</span></label>
+              <label class="check-item"><input type="radio" name="platform" value="xbox"><span>Xbox</span></label>
+              <label class="check-item"><input type="radio" name="platform" value="switch"><span>Nintendo Switch</span></label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-group-title">Minimum rating</p>
+            <div class="field">
+              <label class="visually-hidden" for="rating-select">Minimum rating</label>
+              <select class="select" id="rating-select">
+                <option value="0">Any rating</option>
+                <option value="4">4.0 &amp; up</option>
+                <option value="3">3.0 &amp; up</option>
+                <option value="2">2.0 &amp; up</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="btn btn-outline btn-block" id="filters-reset" type="button">Reset filters</button>
+          </div>
+        </aside>
+
+        <section class="results" aria-label="Search results">
+          <div class="results-bar">
+            <button class="btn btn-outline btn-sm" id="filters-toggle" type="button" aria-controls="filters">
+              Filters
+            </button>
+            <p class="results-count" id="results-count">Loading…</p>
+            <div class="field" style="flex-direction: row; align-items: center; gap: 0.5rem;">
+              <label class="field-label" for="sort-select" style="white-space: nowrap;">Sort</label>
+              <select class="select" id="sort-select">
+                <option value="-metacritic">Metacritic</option>
+                <option value="-rating" selected>Rating</option>
+                <option value="-released">Release date</option>
+                <option value="name">Name (A–Z)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="game-grid" id="game-grid" aria-live="polite"></div>
+
+          <div style="display: flex; justify-content: center; margin-top: 1.4rem;">
+            <button class="btn btn-outline" id="load-more" type="button" hidden>Load more games</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+  <div id="modal-root"></div>
+
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>

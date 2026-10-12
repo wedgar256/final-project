@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Deals — GameVault</title>
+  <meta name="description" content="Live digital game discounts across Steam, Epic, GOG and more — compare sale prices and savings with CheapShark data.">
+  <script>
+    (function () {
+      try {
+        var theme = JSON.parse(localStorage.getItem("gamevault-theme") || '"dark"');
+        document.documentElement.dataset.theme = theme === "light" ? "light" : "dark";
+      } catch (e) { document.documentElement.dataset.theme = "dark"; }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/style.css">
+  <link rel="stylesheet" href="../src/css/header.css">
+  <link rel="stylesheet" href="../src/css/cards.css">
+  <link rel="stylesheet" href="../src/css/modal.css">
+</head>
+<body data-view="deals" data-base="..">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="header-root"></div>
+  <div id="alert-region" aria-live="polite"></div>
+
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <div>
+          <h1>Game Deals</h1>
+          <p>Live discounts across digital storefronts, powered by CheapShark.</p>
+        </div>
+        <p class="results-count" id="deal-count">Loading deals…</p>
+      </section>
+
+      <div class="deal-toolbar">
+        <div class="field">
+          <label class="field-label" for="deal-search">Search deals</label>
+          <input class="input" id="deal-search" type="search" placeholder="Title, e.g. Elden Ring" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="store-select">Store</label>
+          <select class="select" id="store-select">
+            <option value="">All stores</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="savings-select">Min. savings</label>
+          <select class="select" id="savings-select">
+            <option value="0">Any discount</option>
+            <option value="10">10% or more</option>
+            <option value="25">25% or more</option>
+            <option value="50">50% or more</option>
+            <option value="75">75% or more</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="deal-sort">Sort by</label>
+          <select class="select" id="deal-sort">
+            <option value="Savings" selected>Biggest savings</option>
+            <option value="Price">Lowest price</option>
+            <option value="Metacritic">Metacritic</option>
+            <option value="Release">Release date</option>
+            <option value="Title">Title (A–Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="deal-grid" id="deal-grid" aria-live="polite"></div>
+
+      <div style="display: flex; justify-content: center; margin-top: 1.4rem;">
+        <button class="btn btn-outline" id="deal-load-more" type="button" hidden>Load more deals</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+  <div id="modal-root"></div>
+
+  <script type="module" src="../src/js/main.js"></script>
+</body>
+</html>
